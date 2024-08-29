@@ -504,17 +504,17 @@ int scaledown
    SPEEX_MEMSET(exc, 0, nsf);
    for (i=0;i<3;i++)
    {
-      int tmp1, tmp3;
+      int tmp4, tmp3;
       int pp=pitch+1-i;
-      tmp1=nsf;
-      if (tmp1>pp)
-         tmp1=pp;
-      for (j=0;j<tmp1;j++)
+      tmp4=nsf;
+      if (tmp4>pp)
+         tmp4=pp;
+      for (j=0;j<tmp4;j++)
          exc[j]=MAC16_16(exc[j],SHL16(gain[2-i],7),exc2[j-pp]);
       tmp3=nsf;
       if (tmp3>pp+pitch)
          tmp3=pp+pitch;
-      for (j=tmp1;j<tmp3;j++)
+      for (j=tmp4;j<tmp3;j++)
          exc[j]=MAC16_16(exc[j],SHL16(gain[2-i],7),exc2[j-pp-pitch]);
    }
    for (i=0;i<nsf;i++)
