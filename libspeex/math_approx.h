@@ -306,6 +306,10 @@ static inline spx_word16_t spx_atan(spx_word32_t x)
 #define M_PI           3.14159265358979323846  /* pi */
 #endif
 
+#ifndef M_PI_F
+#define M_PI_F           3.14159265358979323846f  /* pi */
+#endif
+
 #define C1 0.9999932946f
 #define C2 -0.4999124376f
 #define C3 0.0414877472f
@@ -320,7 +324,7 @@ static inline spx_word16_t spx_cos(spx_word16_t x)
       x *= x;
       return C1 + x*(C2+x*(C3+C4*x));
    } else {
-      x = M_PI-x;
+      x = M_PI_F-x;
       x *= x;
       return NEG16(C1 + x*(C2+x*(C3+C4*x)));
    }
