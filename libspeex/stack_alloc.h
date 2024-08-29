@@ -47,6 +47,8 @@
 # endif
 #endif
 
+#include <stddef.h>  // ptrdiff_t
+
 /**
  * @def ALIGN(stack, size)
  *
@@ -88,13 +90,13 @@
 
 #include <valgrind/memcheck.h>
 
-#define ALIGN(stack, size) ((stack) += ((size) - (long)(stack)) & ((size) - 1))
+#define ALIGN(stack, size) ((stack) += ((size) - (ptrdiff_t)(stack)) & ((size) - 1))
 
 #define PUSH(stack, size, type) (VALGRIND_MAKE_NOACCESS(stack, 1000),ALIGN((stack),sizeof(type)),VALGRIND_MAKE_WRITABLE(stack, ((size)*sizeof(type))),(stack)+=((size)*sizeof(type)),(type*)((stack)-((size)*sizeof(type))))
 
 #else
 
-#define ALIGN(stack, size) ((stack) += ((size) - (long)(stack)) & ((size) - 1))
+#define ALIGN(stack, size) ((stack) += ((size) - (ptrdiff_t)(stack)) & ((size) - 1))
 
 #define PUSH(stack, size, type) (ALIGN((stack),sizeof(type)),(stack)+=((size)*sizeof(type)),(type*)((stack)-((size)*sizeof(type))))
 
