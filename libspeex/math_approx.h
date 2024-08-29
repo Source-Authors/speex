@@ -93,7 +93,7 @@ static inline spx_int16_t spx_ilog2(spx_uint32_t x)
 
 static inline spx_int16_t spx_ilog4(spx_uint32_t x)
 {
-   int r=0;
+   spx_int16_t r=0;
    if (x>=(spx_int32_t)65536)
    {
       x >>= 16;
