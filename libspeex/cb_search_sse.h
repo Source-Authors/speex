@@ -68,7 +68,7 @@ static void compute_weighted_codebook(const signed char *shape_cb, const spx_sig
       EE = _mm_setzero_ps();
       for(j=0;j<subvect_size;j++)
       {
-         shape[j] = _mm_setr_ps(0.03125*_shape[j], 0.03125*_shape[subvect_size+j], 0.03125*_shape[2*subvect_size+j], 0.03125*_shape[3*subvect_size+j]);
+         shape[j] = _mm_setr_ps(0.03125f*_shape[j], 0.03125f*_shape[subvect_size+j], 0.03125f*_shape[2*subvect_size+j], 0.03125f*_shape[3*subvect_size+j]);
       }
       for(j=0;j<subvect_size;j++)
       {
