@@ -194,7 +194,7 @@ static float cheb_poly_eva(spx_word32_t *coef, spx_word16_t x, int m, char *stac
       b1=tmp;                           /* b1 holds the previous value of b0 */
    }
 
-   return(-b1+.5*x*b0+coef[m]);
+   return(-b1+.5f*x*b0+coef[m]);
 }
 #endif
 
