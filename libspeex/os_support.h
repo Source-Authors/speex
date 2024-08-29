@@ -48,7 +48,7 @@
 /** Speex wrapper for calloc. To do your own dynamic allocation, all you need to do is replace this function, speex_realloc and speex_free
     NOTE: speex_alloc needs to CLEAR THE MEMORY */
 #ifndef OVERRIDE_SPEEX_ALLOC
-static inline void *speex_alloc (int size)
+static inline void *speex_alloc (size_t size)
 {
    /* WARNING: this is not equivalent to malloc(). If you want to use malloc()
       or your own allocator, YOU NEED TO CLEAR THE MEMORY ALLOCATED. Otherwise
@@ -59,7 +59,7 @@ static inline void *speex_alloc (int size)
 
 /** Same as speex_alloc, except that the area is only needed inside a Speex call (might cause problem with wideband though) */
 #ifndef OVERRIDE_SPEEX_ALLOC_SCRATCH
-static inline void *speex_alloc_scratch (int size)
+static inline void *speex_alloc_scratch (size_t size)
 {
    /* Scratch space doesn't need to be cleared */
    return calloc(size,1);
@@ -68,7 +68,7 @@ static inline void *speex_alloc_scratch (int size)
 
 /** Speex wrapper for realloc. To do your own dynamic allocation, all you need to do is replace this function, speex_alloc and speex_free */
 #ifndef OVERRIDE_SPEEX_REALLOC
-static inline void *speex_realloc (void *ptr, int size)
+static inline void *speex_realloc (void *ptr, size_t size)
 {
    return realloc(ptr, size);
 }
