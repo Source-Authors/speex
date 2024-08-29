@@ -43,3 +43,7 @@ src/speexdec
 src/speexenc
 stamp-*
 patches
+
+.vs/
+[Dd]ebug/
+[Rr]elease/
