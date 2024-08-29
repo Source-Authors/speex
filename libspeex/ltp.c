@@ -504,7 +504,6 @@ int scaledown
    SPEEX_MEMSET(exc, 0, nsf);
    for (i=0;i<3;i++)
    {
-      int j;
       int tmp1, tmp3;
       int pp=pitch+1-i;
       tmp1=nsf;
