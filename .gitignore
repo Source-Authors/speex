@@ -47,3 +47,4 @@ patches
 .vs/
 [Dd]ebug/
 [Rr]elease/
+*.exe
