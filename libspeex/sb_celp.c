@@ -299,7 +299,7 @@ int sb_encoder_ctl(void *state, int request, void *ptr)
    case SPEEX_SET_VBR_QUALITY:
       {
          spx_int32_t q;
-         float qual = (*(float*)ptr)+.6;
+         float qual = (*(float*)ptr)+.6f;
          st->vbr_quality = (*(float*)ptr);
          if (qual>10)
             qual=10;
@@ -643,11 +643,11 @@ int sb_encode(void *state, void *vin, SpeexBits *bits)
          if (st->abr_drift2 * st->abr_drift > 0)
          {
             /* Only adapt if long-term and short-term drift are the same sign */
-            qual_change = -.00001*st->abr_drift/(1+st->abr_count);
-            if (qual_change>.1)
-               qual_change=.1;
-            if (qual_change<-.1)
-               qual_change=-.1;
+            qual_change = -.00001f*st->abr_drift/(1+st->abr_count);
+            if (qual_change>.1f)
+               qual_change=.1f;
+            if (qual_change<-.1f)
+               qual_change=-.1f;
          }
          st->vbr_quality += qual_change;
          if (st->vbr_quality>10)
@@ -657,7 +657,7 @@ int sb_encode(void *state, void *vin, SpeexBits *bits)
       }
 
 
-      ratio = 2*log((1.f+e_high)/(1.f+e_low));
+      ratio = 2*logf((1.f+e_high)/(1.f+e_low));
 
       speex_encoder_ctl(st->st_low, SPEEX_GET_RELATIVE_QUALITY, &st->relative_quality);
       if (ratio<-4)
@@ -669,7 +669,7 @@ int sb_encode(void *state, void *vin, SpeexBits *bits)
       {
          spx_int32_t modeid;
          modeid = mode->nb_modes-1;
-         st->relative_quality+=1.0*(ratio+2);
+         st->relative_quality+=1.0f*(ratio+2);
 	 if (st->relative_quality<-1)
             st->relative_quality=-1;
          while (modeid)
@@ -692,8 +692,8 @@ int sb_encode(void *state, void *vin, SpeexBits *bits)
             spx_int32_t bitrate;
             speex_encoder_ctl(state, SPEEX_GET_BITRATE, &bitrate);
             st->abr_drift+=(bitrate-st->abr_enabled);
-            st->abr_drift2 = .95*st->abr_drift2 + .05*(bitrate-st->abr_enabled);
-            st->abr_count += 1.0;
+            st->abr_drift2 = .95f*st->abr_drift2 + .05f*(bitrate-st->abr_enabled);
+            st->abr_count += 1.0f;
          }
 
       } else {
