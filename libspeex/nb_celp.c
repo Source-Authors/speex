@@ -588,11 +588,11 @@ int nb_encode(void *state, void *vin, SpeexBits *bits)
          if (st->abr_drift2 * st->abr_drift > 0)
          {
             /* Only adapt if long-term and short-term drift are the same sign */
-            qual_change = -.00001*st->abr_drift/(1+st->abr_count);
-            if (qual_change>.05)
-               qual_change=.05;
-            if (qual_change<-.05)
-               qual_change=-.05;
+            qual_change = -.00001f*st->abr_drift/(1+st->abr_count);
+            if (qual_change>.05f)
+               qual_change=.05f;
+            if (qual_change<-.05f)
+               qual_change=-.05f;
          }
          st->vbr_quality += qual_change;
          if (st->vbr_quality>10)
@@ -659,8 +659,8 @@ int nb_encode(void *state, void *vin, SpeexBits *bits)
             spx_int32_t bitrate;
             speex_encoder_ctl(state, SPEEX_GET_BITRATE, &bitrate);
             st->abr_drift+=(bitrate-st->abr_enabled);
-            st->abr_drift2 = .95*st->abr_drift2 + .05*(bitrate-st->abr_enabled);
-            st->abr_count += 1.0;
+            st->abr_drift2 = .95f*st->abr_drift2 + .05f*(bitrate-st->abr_enabled);
+            st->abr_count += 1.0f;
          }
 
       } else {
@@ -1207,7 +1207,7 @@ int nb_decoder_ctl(void *state, int request, void *ptr)
    case SPEEX_GET_ACTIVITY:
    {
       float ret;
-      ret = log(st->level/st->min_level)/log(st->max_level/st->min_level);
+      ret = logf(st->level/st->min_level)/logf(st->max_level/st->min_level);
       if (ret>1)
          ret = 1;
       /* Done in a strange way to catch NaNs as well */
