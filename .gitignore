@@ -48,3 +48,4 @@ patches
 [Dd]ebug/
 [Rr]elease/
 *.exe
+*.dll
